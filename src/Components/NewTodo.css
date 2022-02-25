@@ -1,0 +1,10 @@
+.todo-container {
+    width:"328px",
+    height: "40px",
+    backgroundColor: "hsl(0, 0%, 98%)",
+    color: "hsl(233, 11%, 84%)",
+    display: "flex",
+    justifyContent: "center",
+    border: "1px solid hsl(233, 11%, 84%)",
+    borderRadius: "5px"
+}

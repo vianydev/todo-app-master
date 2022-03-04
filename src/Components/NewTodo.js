@@ -1,4 +1,4 @@
-const NewTodo = () => {
+const NewTodo = ({ handleNewTodo, addTodo }) => {
     return (
         <section className="todo-container">
             <div className="todo-box">
@@ -10,6 +10,8 @@ const NewTodo = () => {
                 <input className="todo-input"
                     type="text"
                     placeholder="Create a new todo..."
+                    onChange={handleNewTodo}
+                    onKeyDown={addTodo}
                 ></input>
             </div>
         </section>

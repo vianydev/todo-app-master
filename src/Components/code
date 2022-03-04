@@ -1,0 +1,25 @@
+{
+
+                    completedList.map( item => (
+                        <section className="todos-box" key={ item.id }>
+                            <label className="radio-container">
+                                <input  
+                                    className="radio__input"
+                                    type="checkbox"
+                                    onClick={()=>completedCheckMark(item.id)}>
+                                </input>
+                                <div className="radio__radio"></div>
+                            </label>
+
+                            <div className="todo-text-container">
+                                <p 
+                                    id={item.id}
+                                    className="todo-text check"> {item.todo} </p>
+                                <div 
+                                    className="icon cross"
+                                    onClick={() => deleteTodo(item.id)}>
+                                    <img src={iconCross} alt="icon-cross"></img>
+                                </div>
+                            </div>
+                        </section> ))
+                }

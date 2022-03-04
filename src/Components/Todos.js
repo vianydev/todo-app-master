@@ -1,64 +1,131 @@
 import iconCross from "../images/icon-cross.svg";
 
-const Todos = () => {
-    return (
-        <div className="todos-container">
-            <section className="todos-box">
-                <label className="radio-container">
-                    <input  className="radio__input"
-                            type="checkbox"
-                            
-                    ></input>
-                    <div className="radio__radio"> </div>
-                </label>
+const Todos = ({ 
+    todoList, 
+    completedList,
+    markCompleted,
+    deleteTodo, 
+    filterStatus }) => {
 
-                <div className="todo-text-container">
-                    <p 
-                        style={{
-                            textDecoration: "line-through",
-                            color: "hsl(236, 33%, 92%)",
-                        }}> 
-                    Occaecat dolore pariatur ipsum ex sit cupidatat reprehenderit enim eu ut mollit nisi labore adipisicing. </p>
-                    <div className="icon cross">
-                        <img src={iconCross} alt="icon-cross"></img>
-                    </div>
-                </div>
-            </section>
+    if(filterStatus === "all"){
+        return (
+            <div className="todos-container">
+                {  
+                    todoList.map( (item, index) => (
+                        <section 
+                            className="todos-box" 
+                            key={ item.id } 
+                            index={index} 
+                        >
+                            <label className="radio-container">
+                                <input
+                                    id="radio"                                    className="radio__input"
+                                    type="checkbox"
+                                    onClick={()=>markCompleted(item.id, index)}
+                                >
+                                </input>
+                                <div className="radio__radio"></div>
+                            </label>
+    
+                            <div className="todo-text-container">
+                                <p 
+                                    id={item.id}
+                                    className="active"
+                                > 
+                                    {item.todo}
+                                </p>
+                                <div 
+                                    className="icon cross"
+                                    onClick={() => deleteTodo(item.id)}>
+                                    <img src={iconCross} alt="icon-cross"></img>
+                                </div>
+                            </div>
+                        </section> ))
+                }
+            </div> 
+        )
 
-            <section className="todos-box">
-                <label className="radio-container">
-                    <input  className="radio__input"
-                            type="checkbox"
-                    ></input>
-                    <div className="radio__radio"></div>
-                </label>
+    } else if (filterStatus === "completed"){
+        let completed = todoList.filter(item => item.status === "completed");
 
-                <div className="todo-text-container">
-                    <p> Occaecat dolore pariatur. </p>
-                    <div className="icon cross">
-                        <img src={iconCross} alt="icon-cross"></img>
-                    </div>
-                </div>
-            </section>
+        return (
+            <div className="todos-container">
+                {  
+                    completed.map( (item, index) => (
+                        <section 
+                            className="todos-box" 
+                            key={ item.id } 
+                            index={index} 
+                        >
+                            <label className="radio-container">
+                                <input
+                                    id="radio"                                    className="radio__input"
+                                    type="checkbox"
+                                    defaultChecked
+                                    onClick={()=>markCompleted(item.id, index)}
+                                >
+                                </input>
+                                <div className="radio__radio"></div>
+                            </label>
+    
+                            <div className="todo-text-container">
+                                <p 
+                                    id={item.id}
+                                    className="completed"
+                                > 
+                                    {item.todo}
+                                </p>
+                                <div 
+                                    className="icon cross"
+                                    onClick={() => deleteTodo(item.id)}>
+                                    <img src={iconCross} alt="icon-cross"></img>
+                                </div>
+                            </div>
+                        </section> ))
+                }
+            </div> 
+        )
+    } else if (filterStatus === "active") {
+        let activeItems =  todoList.filter(item => item.status === "active");
 
-            <section className="todos-box">
-                <label className="radio-container">
-                    <input  className="radio__input"
-                            type="checkbox"
-                    ></input>
-                    <div className="radio__radio"></div>
-                </label>
-
-                <div className="todo-text-container">
-                    <p> Fugiat elit aute aliqua sint Lorem voluptate et officia laborum occaecat voluptate mollit. </p>
-                    <div className="icon cross">
-                        <img src={iconCross} alt="icon-cross"></img>
-                    </div>
-                </div>
-            </section>
-        </div>
-        
-    )
+        return (
+            <div className="todos-container">
+                {  
+                    activeItems.map( (item, index) => (
+                        <section 
+                            className="todos-box" 
+                            key={ item.id } 
+                            index={index} 
+                        >
+                            <label className="radio-container">
+                                <input
+                                    id="radio"                                    className="radio__input"
+                                    type="checkbox"
+                                    onClick={()=>markCompleted(item.id, index)}
+                                >
+                                </input>
+                                <div className="radio__radio"></div>
+                            </label>
+    
+                            <div className="todo-text-container">
+                                <p 
+                                    id={item.id}
+                                    className="active"
+                                > 
+                                    {item.todo}
+                                </p>
+                                <div 
+                                    className="icon cross"
+                                    onClick={() => deleteTodo(item.id)}>
+                                    <img src={iconCross} alt="icon-cross"></img>
+                                </div>
+                            </div>
+                        </section> ))
+                }
+            </div> 
+        )
+    }
+    
 }
 
 export default Todos;

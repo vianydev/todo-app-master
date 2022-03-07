@@ -4,18 +4,19 @@ import sun from "../images/icon-sun.svg";
 const Toogle = ({ handleTheme }) => {
     return (
         <div>
-            <img className="icon-toggle" 
+            <img
+                id="moon" 
+                className="icon-toggle" 
                 src={moon} 
                 alt="icon-moon"
                 onClick={handleTheme}
                 ></img>
             <img 
+                id="sun"
                 className="icon-toggle" 
                 src={sun} 
                 alt="icon-sun"
-                style={{
-                    display: "none"
-                }}
+                onClick={handleTheme}
                 ></img>
         </div>
     )

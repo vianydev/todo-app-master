@@ -2,7 +2,6 @@ import iconCross from "../images/icon-cross.svg";
 
 const Todos = ({ 
     todoList, 
-    completedList,
     markCompleted,
     deleteTodo, 
     filterStatus }) => {
@@ -11,18 +10,17 @@ const Todos = ({
         return (
             <div className="todos-container">
                 {  
-                    todoList.map( (item, index) => (
+                    todoList.map( item => (
                         <section 
                             className="todos-box" 
-                            key={ item.id } 
-                            index={index} 
-                        >
+                            key={ item.id } >
                             <label className="radio-container">
                                 <input
-                                    id="radio"                                    className="radio__input"
+                                    className="radio__input"
                                     type="checkbox"
-                                    onClick={()=>markCompleted(item.id, index)}
-                                >
+                                    defaultChecked={item.status === "completed" ?
+                                    "checked" : "" }
+                                    onClick={()=>markCompleted(item.id)}>
                                 </input>
                                 <div className="radio__radio"></div>
                             </label>
@@ -30,7 +28,7 @@ const Todos = ({
                             <div className="todo-text-container">
                                 <p 
                                     id={item.id}
-                                    className="active"
+                                    className={item.status}
                                 > 
                                     {item.todo}
                                 </p>
@@ -46,23 +44,21 @@ const Todos = ({
         )
 
     } else if (filterStatus === "completed"){
-        let completed = todoList.filter(item => item.status === "completed");
+        let completedList = todoList.filter(item => item.status === "completed")
 
         return (
             <div className="todos-container">
                 {  
-                    completed.map( (item, index) => (
+                    completedList.map( item => (
                         <section 
                             className="todos-box" 
-                            key={ item.id } 
-                            index={index} 
-                        >
+                            key={ item.id } >
                             <label className="radio-container">
                                 <input
                                     id="radio"                                    className="radio__input"
                                     type="checkbox"
                                     defaultChecked
-                                    onClick={()=>markCompleted(item.id, index)}
+                                    onClick={()=>markCompleted(item.id)}
                                 >
                                 </input>
                                 <div className="radio__radio"></div>
@@ -71,7 +67,7 @@ const Todos = ({
                             <div className="todo-text-container">
                                 <p 
                                     id={item.id}
-                                    className="completed"
+                                    className={item.status}
                                 > 
                                     {item.todo}
                                 </p>
@@ -86,23 +82,20 @@ const Todos = ({
             </div> 
         )
     } else if (filterStatus === "active") {
-        let activeItems =  todoList.filter(item => item.status === "active");
+        let activeList = todoList.filter(item => item.status === "active");
 
         return (
             <div className="todos-container">
                 {  
-                    activeItems.map( (item, index) => (
+                    activeList.map( item => (
                         <section 
                             className="todos-box" 
-                            key={ item.id } 
-                            index={index} 
-                        >
+                            key={ item.id } >
                             <label className="radio-container">
                                 <input
                                     id="radio"                                    className="radio__input"
                                     type="checkbox"
-                                    onClick={()=>markCompleted(item.id, index)}
-                                >
+                                    onClick={()=>markCompleted(item.id)} >
                                 </input>
                                 <div className="radio__radio"></div>
                             </label>
@@ -110,7 +103,7 @@ const Todos = ({
                             <div className="todo-text-container">
                                 <p 
                                     id={item.id}
-                                    className="active"
+                                    className={item.status}
                                 > 
                                     {item.todo}
                                 </p>

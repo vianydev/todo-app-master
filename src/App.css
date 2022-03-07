@@ -35,6 +35,12 @@
 .icon-toggle {
   cursor: pointer;
 }
+#moon {
+  display: block;
+}
+#sun {
+  display: none;
+}
 
 
 @media only screen and (min-width: 584px){
@@ -206,6 +212,12 @@ input:focus-visible {
   justify-content: space-between;
   align-items: center;
 }
+.mobile-box {
+  display: flex;
+  justify-content: center;
+  background-color: var(--background-components);
+  border-radius: 5px;
+}
 .filter-box p {
   margin: 1.2rem 1rem;
 }
@@ -247,7 +259,14 @@ input:focus-visible {
     margin: 1rem .5rem;
   }
 }
+
+/* Drag and Drop section */
 .drag-text {
   margin: 3rem 0;
   text-align: center;
+}
+.drag-drop {
+  margin: 3rem 2rem;
+    display: flex;
+    justify-content: center;
 }

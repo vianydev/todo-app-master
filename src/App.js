@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, {useState } from "react";
 import useLocalStorage from "use-local-storage";
 import Toggle from './Components/Toggle';
 import NewTodo from './Components/NewTodo';
@@ -10,39 +10,42 @@ import './App.css';
 function App() {
   // Toggle Dark-light theme
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
   const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+
   const handleTheme = () => {
+    const moon = document.getElementById("moon");
+    const sun = document.getElementById("sun");
+
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
+
+    if(theme === "light"){
+      moon.style.display = "none";
+      sun.style.display = "block";
+    } else if (theme === "dark"){
+      moon.style.display = "block";
+      sun.style.display = "none";
+    }
   }
+
   //New Todo
   const [newTodo, setNewTodo] = useState("");
   const handleNewTodo = (e) => {
     setNewTodo(e.target.value);
   }
 
-  //Add todos
-  const [todoList, setTodoList] = useState([{
-    id: 1,
-    todo: "this is a test",
-    status: "active"
-    },
-    {
-      id: 2,
-      todo: "second todo in the list",
-      status: "active"
-    },
-    {
-      id: 3,
-      todo: "Hardcode to show todo list in the app",
-      status: "active"
-    }
-  ])
+  //Add todos - expect an object // status: active or completed
+  // {
+  //   id: 1,
+  //   todo: "this is a test",
+  //   status: "active"
+  // }
+  const [todoList, setTodoList] = useState([]);
 
   const addTodo = e => {
     let lastId = todoList.length !== 0
-    ? Math.max.apply(null, todoList.map(item => item.id))
-    : 0;
+    ? Math.max.apply(null, todoList.map(item => item.id)) : 0;
     let newId = ++lastId;
     const noSpace = /.*\S.*/;
 
@@ -63,39 +66,32 @@ function App() {
     setTodoList(removeTodo);
   }
 
-  //add Mark
-  const markCompleted = (id, index) => {
+  //add Completed Mark
+  const [completedList, setCompletedList] = useState([]);
+
+  const markCompleted = id => {
     const todoText = document.getElementById(id);
+    const index = todoList.findIndex(item => item.id === id);
+    
+    if(todoList[index].status === "active"){
+      todoList[index].status = "completed";
+      todoText.classList.remove("active");
+      todoText.classList.add("completed");
 
-    if(todoList[index].status === "completed"){
-      todoList[index].status = "active"
-      todoText.classList.remove("completed")
-      todoText.classList.add("active")
-      // const activeitems = todoList.filter(item => item.id === id)
+      const completed = todoList.filter(item => item.status === "completed");
+      setCompletedList([...completed]);
 
-    } else {
-      todoList[index].status = "completed"
-      todoText.classList.remove("active")
-      todoText.classList.add("completed")
+    } else if (todoList[index].status === "completed"){
+      todoList[index].status = "active" ;
+      todoText.classList.remove("completed");
+      todoText.classList.add("active");
+
+      const completed = todoList.filter(item => item.status === "completed");
+      setCompletedList([...completed]);
     }
   }
 
-  //Lists
-  const [completedList, setCompletedList] = useState([]);
-  
-
-  const completedFilter = () => {
-    let completedItems = todoList.filter(item => item.status === "completed");
-    setCompletedList([...completedItems]);
-    console.log(completedList)
-  }
-
-  useEffect(()=> {
-    completedFilter()
-  }, [])
-
-
-  const clearCompleted = e => {
+  const clearCompleted = () => {
     let newList = todoList.filter(item => item.status === "active");
     setTodoList(newList);
     setCompletedList([]);
@@ -104,7 +100,7 @@ function App() {
   //Filter
   const [filterStatus, setFilterStatus] = useState("all");
 
-  const handleFilter = e => {
+  const changeFilter = e => {
     const all = document.getElementById("all");
     const active = document.getElementById("active");
     const completed = document.getElementById("completed");
@@ -114,11 +110,13 @@ function App() {
       active.classList.remove("activated");
       completed.classList.remove("activated");
       setFilterStatus("all");
+
     } else if (e.target === active) {
       all.classList.remove("activated");
       completed.classList.remove("activated");
       active.classList.add("activated");
       setFilterStatus("active");
+
     } else if (e.target === completed) {
       all.classList.remove("activated");
       active.classList.remove("activated");
@@ -128,18 +126,16 @@ function App() {
   }
 
   const itemsLeft = () => {
-    if (completedList.length > 0 && todoList.length > 0) {
-      let result = todoList.length - completedList.length;
-      return result > 1 ? result + " items left" : result + " item left";
-    } else if (todoList.length > 1){
-      return todoList.length + " items left"
-    } else if (todoList.length === 1) {
-      return todoList.length + " item left"
+    let items = todoList.length
+    let completed = completedList.length;
+    let active = items - completed;
+
+    if (active === 1){
+      return `${active} item left`
     } else {
-      return "0 items left"
+      return `${active} items left`
     }
   }
-
 
   return (
     <div className="App" data-theme={theme}>
@@ -159,14 +155,17 @@ function App() {
           deleteTodo={deleteTodo}
           markCompleted={markCompleted}
           filterStatus={filterStatus}
-          completedList={completedList}
         />
         <Filter
           itemsLeft={itemsLeft}
-          handleFilter={handleFilter}
+          changeFilter={changeFilter}
           clearCompleted={clearCompleted} 
         />
-        <p className="drag-text">Drag and drop to reorder list</p>
+
+        <div className="drag-drop">
+          <p className="drag-text">Drag and drop to reorder list</p>
+        </div>
+        
       </div>
     </div>
   )

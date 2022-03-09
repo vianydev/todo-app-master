@@ -12,7 +12,7 @@
   width: 100%;
   min-height: 200px;
   position: absolute;
-  background: url(./images/bg-mobile-light.jpg) no-repeat center;
+  background: var(--bg-image-mobile);
 }
 .app-container {
   z-index: 1;
@@ -56,7 +56,7 @@
     width: 100%;
     height: 300px;
     position: absolute;
-    background: url(./images/bg-desktop-light.jpg) no-repeat center;
+    background: var(--bg-image-desktop);
   }
 }
 
@@ -194,35 +194,45 @@ input:focus-visible {
 }
 
 
+.filter-container {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "items"
+    "filter";
+  row-gap: 15px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
 .filter-container p {
   font-size: .8rem;
 }
-.filter-desktop {
-  display: none;
-}
-.filter-mobile {
-  font-size: .8rem;
-  max-height: 47px;
+.filter-box {
+  grid-area: items;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: var(--background-components);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-.filter-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .mobile-box {
+  width: 100%;
+  grid-area: filter;
   display: flex;
   justify-content: center;
   background-color: var(--background-components);
   border-radius: 5px;
 }
-.filter-box p {
+.filter-box p, .mobile-box p {
   margin: 1.2rem 1rem;
 }
 .clear {
   cursor: pointer;
+  grid-area: clear;
 }
 .clear:hover {
   color: var(--main-text);
@@ -232,16 +242,11 @@ input:focus-visible {
 }
 
 @media only screen and (min-width: 584px) {
-  .filter-mobile {
-    display: none;
-  }
-  .filter-desktop {
-    background-color: var(--background-components);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .filter-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
   }
   .item {
     margin: 1rem;
@@ -250,13 +255,19 @@ input:focus-visible {
     cursor: pointer;
     font-size: 1rem;
     font-weight: 700;
-    display: flex;
   }
   .filter-box p:hover {
     color: var(--main-text);
   }
   .filter-item {
     margin: 1rem .5rem;
+  }
+  .mobile-box {
+    width: fit-content;
+    position: relative;
+    top: -67px;
+    left: 153px;
+    background-color: transparent;
   }
 }
 

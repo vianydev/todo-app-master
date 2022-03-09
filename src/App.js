@@ -4,6 +4,7 @@ import Toggle from './Components/Toggle';
 import NewTodo from './Components/NewTodo';
 import Todos from './Components/Todos';
 import Filter from './Components/Filter';
+
 import './App.css';
 
 
@@ -35,13 +36,21 @@ function App() {
     setNewTodo(e.target.value);
   }
 
-  //Add todos - expect an object // status: active or completed
-  // {
-  //   id: 1,
-  //   todo: "this is a test",
-  //   status: "active"
-  // }
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState([{
+      id: 1,
+      todo: "Spanish homework",
+      status: "active"
+    },
+    {
+      id: 2,
+      todo: "Buy groseries",
+      status: "active"
+    },
+    {
+      id: 3,
+      todo: "Write documentation",
+      status: "active"
+    }]);
 
   const addTodo = e => {
     let lastId = todoList.length !== 0
@@ -150,11 +159,14 @@ function App() {
           handleNewTodo={handleNewTodo}
           addTodo={addTodo}
         />
+
         <Todos
           todoList={todoList}
+          setTodoList={setTodoList}
           deleteTodo={deleteTodo}
           markCompleted={markCompleted}
           filterStatus={filterStatus}
+
         />
         <Filter
           itemsLeft={itemsLeft}

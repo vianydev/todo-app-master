@@ -6,6 +6,8 @@
   --main-text: hsl(235, 19%, 35%);
   --text: hsl(236, 9%, 61%);
   --lines: hsl(233, 11%, 84%);
+  --bg-image-mobile: url(./images/bg-mobile-light.jpg) no-repeat center;
+  --bg-image-desktop: url(./images/bg-desktop-light.jpg) no-repeat center;
 }
 
 [data-theme="dark"] {
@@ -18,6 +20,8 @@
   --text: hsl(234, 11%, 52%);
   --lines: hsl(233, 14%, 35%);
   --veryDarkGrayishBlue: hsl(237, 14%, 26%);
+  --bg-image-mobile: url(./images/bg-mobile-dark.jpg) no-repeat center;
+  --bg-image-desktop: url(./images/bg-desktop-dark.jpg) no-repeat center;
 }
 
 * {

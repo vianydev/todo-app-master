@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/vianydev/todo-app-master/static/css/main.bb229d8a.css",
+    "main.js": "/vianydev/todo-app-master/static/js/main.1d5755d3.js",
+    "static/js/787.2843ca88.chunk.js": "/vianydev/todo-app-master/static/js/787.2843ca88.chunk.js",
+    "static/media/bg-desktop-light.jpg": "/vianydev/todo-app-master/static/media/bg-desktop-light.3508d620efd5a52bb4ce.jpg",
+    "static/media/bg-desktop-dark.jpg": "/vianydev/todo-app-master/static/media/bg-desktop-dark.73e47dbb723ebc772ef0.jpg",
+    "index.html": "/vianydev/todo-app-master/index.html",
+    "static/media/icon-sun.svg": "/vianydev/todo-app-master/static/media/icon-sun.910b1f9a23741afc341e95653a51f14f.svg",
+    "static/media/icon-moon.svg": "/vianydev/todo-app-master/static/media/icon-moon.6c03114b495d05f4380b3c544d9afe2a.svg",
+    "static/media/icon-cross.svg": "/vianydev/todo-app-master/static/media/icon-cross.6ee81d30b75cab19d6f7314624fcc4d6.svg",
+    "static/media/icon-check.svg": "/vianydev/todo-app-master/static/media/icon-check.a8fb15d0278c8e312df5.svg",
+    "main.bb229d8a.css.map": "/vianydev/todo-app-master/static/css/main.bb229d8a.css.map",
+    "main.1d5755d3.js.map": "/vianydev/todo-app-master/static/js/main.1d5755d3.js.map",
+    "787.2843ca88.chunk.js.map": "/vianydev/todo-app-master/static/js/787.2843ca88.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bb229d8a.css",
+    "static/js/main.1d5755d3.js"
+  ]
+}

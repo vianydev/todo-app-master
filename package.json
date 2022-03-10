@@ -1,8 +1,8 @@
 {
   "name": "todo-app",
-  "homepage": "https://github.com/vianydev/todo-app-master",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vianydev.github.io/todo-app-master",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",

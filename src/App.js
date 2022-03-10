@@ -4,7 +4,6 @@ import Toggle from './Components/Toggle';
 import NewTodo from './Components/NewTodo';
 import Todos from './Components/Todos';
 import Filter from './Components/Filter';
-
 import './App.css';
 
 
